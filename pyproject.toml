@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "airfrans"
+version = "0.1.0"
+authors = [
+  { name="Florent Bonnet", email="bonnet@isir.upmc.fr" },
+]
+description = "A package to facilitate the manipulation of the AirfRANS dataset simulations."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+	"torch >= 1.11.0",
+	"pyvista >= 0.37.0",
+	"tqdm"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Extrality/airfrans_lib"
+"Bug Tracker" = "https://github.com/Extrality/airfrans_lib/issues"
