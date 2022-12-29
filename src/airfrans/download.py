@@ -51,7 +51,7 @@ def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
         with zipfile.ZipFile(osp.join(root, file_name + '.zip'), 'r') as zipf:
             zipf.extractall(root)
 
-def Loading(root, task, train = True):
+def Load(root, task, train = True):
     """
     The different tasks (`'full'`, `'scarce'`, `'reynolds'`,
     `'aoa'`) define the utilized training and test splits. Please note
