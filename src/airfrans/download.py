@@ -1,7 +1,11 @@
+
+import json
 from urllib.request import urlretrieve
-from tqdm import tqdm
 import os.path as osp
 import zipfile
+
+import torch
+from tqdm import tqdm
 
 class DownloadProgressBar(tqdm):
     """Provides `update_to(n)` which uses `tqdm.update(delta_n)`."""
@@ -44,3 +48,74 @@ def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
     if unzip:
         with zipfile.ZipFile(osp.join(root, file_name + '.zip'), 'r') as zipf:
             zipf.extractall(root)
+
+def Loading(root, task, train = True):
+    """
+    The different tasks (`'full'`, `'scarce'`, `'reynolds'`,
+    `'aoa'`) define the utilized training and test splits. Please note
+    that the test set for the `'full'` and `'scarce'` tasks are the same.
+
+    Each simulation is given as a point cloud defined via the nodes of the
+    simulation mesh. Each point of a point cloud is described via 7
+    features: its position (in meters), the inlet velocity (two components in meter per second), the
+    distance to the airfoil (one component in meter), and the normals (two
+    components in meter, set to `0` if the point is not on the airfoil).
+
+    Each point is given a target of 4 components for the underyling regression
+    task: the velocity (two components in meter per second), the pressure
+    divided by the specific mass (one component in meter squared per second
+    squared), the turbulent kinematic viscosity (one component in meter squared
+    per second).
+
+    Finaly, a boolean is attached to each point to inform if this point lies on
+    the airfoil or not.
+
+    The output is a tuple of a list of torch.tensor of shape (N, 7 + 4 + 1), where N is the
+    number of points in each simulation and where the features are ordered as presented
+    in this documentation, and a list of name for the each corresponding simulation.
+
+    We highly recommend to handle those data with the help of a Geometric Deep
+    Learning library such as PyTorch Geometric or Deep Graph Library.
+
+    Args:
+        root (string): Root directory where the dataset has been saved.
+        task (string): The task to study (`'full'`, `'scarce'`,
+            `'reynolds'`, `'aoa'`) that defines the utilized training
+            and test splits.
+        train (bool, optional): If `True`, loads the training dataset,
+            otherwise the test dataset. Default: `True`
+    """
+    tasks = ['full', 'scarce', 'reynolds', 'aoa']
+    if task not in tasks:
+        raise ValueError(f"Expected 'task' to be in {tasks} "
+                            f"got '{task}'")
+
+    taskk = 'full' if task == 'scarce' and not train else task
+    split = 'train' if train else 'test'
+
+    with open(osp.join(root, 'Dataset/manifest.json'), 'r') as f:
+        manifest = json.load(f)[taskk + '_' + split]
+
+    data_list = []
+    name_list = []
+    for s in tqdm(manifest, desc = f'Loading dataset, task: {taskk}, split: {split}'):
+        simulation = Simulation(root = osp.join(root, 'Dataset'), name = s)
+        inlet_velocity = (torch.tensor([torch.cos(simulation.angle_of_attack),\
+                torch.sin(simulation.angle_of_attack)])*simulation.inlet_velocity).reshape(1, 2)\
+                *torch.ones_like(simulation.sdf)
+
+        attribute = torch.cat([
+            simulation.position,
+            inlet_velocity,
+            simulation.sdf,
+            simulation.normals,
+            simulation.velocity,
+            simulation.pressure,
+            simulation.nu_t,
+            simulation.surface.reshape(-1, 1)
+        ], dim = -1)
+
+        data_list.append(attribute)
+        name_list.append(s)
+    
+    return data_list, name_list
