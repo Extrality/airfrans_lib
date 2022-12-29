@@ -1,6 +1,6 @@
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
-import airfrans.download as download
+import airfrans.dataset as dataset
 import airfrans.naca_generator as naca_generator
 import airfrans.sampling as sampling
 from airfrans.reorganize import reorganize
