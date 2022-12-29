@@ -37,7 +37,7 @@ The tasks are the one presented in the [associated paper](https://arxiv.org/pdf/
 The dataset loaded in this case is the same as the one you can directly access via the [PyTorch Geometric library](https://pytorch-geometric.readthedocs.io/en/latest/modules/datasets.html#torch_geometric.datasets.AirfRANS). If you want more flexibility about the sampling of each simulation for the inputs or targets, please feel free to build a custom loader with the help of the `'Simulation'` class presented in the following. We highly recommend to handle those data with a Gemetric Deep Learning library such as [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/) or [Deep Graph Library](https://www.dgl.ai/).
 
 ### Simulation class
-The `'Simulation'` classe is an object to facilitate the manipulation of AirfRANS simulations. Given the root folder of where the directories of the simulations have been saved and the name of a simulation you can easily manipulate it.
+The `'Simulation'` class is an object to facilitate the manipulation of AirfRANS simulations. Given the root folder of where the directories of the simulations have been saved and the name of a simulation you can easily manipulate it.
 ```
 import airfrans as af
 
