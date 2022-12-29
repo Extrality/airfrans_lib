@@ -3,9 +3,9 @@ import os.path as osp
 import torch
 import pyvista as pv
 
-from reorganize import reorganize
-from naca_generator import camber_line
-import sampling
+from airfrans.reorganize import reorganize
+from airfrans.naca_generator import camber_line
+import airfrans.sampling as sampling
 
 class Simulation:
     """

@@ -7,7 +7,7 @@ import zipfile
 import torch
 from tqdm import tqdm
 
-from src.airfrans.simulation import Simulation
+from airfrans.simulation import Simulation
 
 class DownloadProgressBar(tqdm):
     """Provides `update_to(n)` which uses `tqdm.update(delta_n)`."""
