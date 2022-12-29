@@ -80,7 +80,7 @@ def Loading(root, task, train = True):
     Learning library such as PyTorch Geometric or Deep Graph Library.
 
     Args:
-        root (string): Root directory where the dataset has been saved.
+        root (string): Root directory where the simulation directories have been saved.
         task (string): The task to study (`'full'`, `'scarce'`,
             `'reynolds'`, `'aoa'`) that defines the utilized training
             and test splits.
@@ -95,13 +95,13 @@ def Loading(root, task, train = True):
     taskk = 'full' if task == 'scarce' and not train else task
     split = 'train' if train else 'test'
 
-    with open(osp.join(root, 'Dataset/manifest.json'), 'r') as f:
+    with open(osp.join(root, 'manifest.json'), 'r') as f:
         manifest = json.load(f)[taskk + '_' + split]
 
     data_list = []
     name_list = []
     for s in tqdm(manifest, desc = f'Loading dataset, task: {taskk}, split: {split}'):
-        simulation = Simulation(root = osp.join(root, 'Dataset'), name = s)
+        simulation = Simulation(root = root, name = s)
         inlet_velocity = (torch.tensor([torch.cos(simulation.angle_of_attack),\
                 torch.sin(simulation.angle_of_attack)])*simulation.inlet_velocity).reshape(1, 2)\
                 *torch.ones_like(simulation.sdf)
