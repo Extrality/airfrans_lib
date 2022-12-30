@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "airfrans"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
   { name="Florent Bonnet", email="bonnet@isir.upmc.fr" },
 ]
@@ -13,7 +13,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "License :: Open Data Commons Open Database License (ODbL) v1.0",
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",

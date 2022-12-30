@@ -2,12 +2,12 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'AirfRANS'
+copyright = '2022, Florent Bonnet'
+author = 'Florent Bonnet'
 
 release = '0.1'
-version = '0.1.0'
+version = '0.1.2'
 
 # -- General configuration
 
