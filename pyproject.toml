@@ -19,7 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-	"torch >= 1.11.0",
+	"numpy",
 	"pyvista >= 0.37.0",
 	"tqdm"
 ]

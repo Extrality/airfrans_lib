@@ -1,4 +1,4 @@
-import torch
+import numpy as np
 
 def thickness_dist(t, x, CTE = True):
     """
@@ -7,7 +7,7 @@ def thickness_dist(t, x, CTE = True):
 
     Args:
         t (float): Thickness of the airfoil in percentage of the chord length.
-        x (torch.tensor): Abscissas in chord unit.
+        x (np.ndarray): Abscissas in chord unit.
         CTE (bool, optional): If ``True`` the profile will be closed at the trailing edge. Default: ``True``
     """
     # CTE for close trailing edge
@@ -15,18 +15,18 @@ def thickness_dist(t, x, CTE = True):
         a = -0.1036
     else:
         a = -0.1015
-    return 5*t*(0.2969*torch.sqrt(x) - 0.1260*x - 0.3516*x**2 + 0.2843*x**3 + a*x**4)
+    return 5*t*(0.2969*np.sqrt(x) - 0.1260*x - 0.3516*x**2 + 0.2843*x**3 + a*x**4)
 
 def camber_line(params, x):
     """
     Camber line definition for the NACA 4 and 5 digits series.
 
     Args:
-        params (torch.tensor): Parameters of the NACA 4 or 5 digits profile (tensor of shape (3) or (4)).
-        x (torch.tensor): Abscissas in chord unit.
+        params (np.ndarray): Parameters of the NACA 4 or 5 digits profile (ndarray of shape `(3)` or `(4)`).
+        x (np.ndarray): Abscissas in chord unit.
     """
-    y_c = torch.zeros_like(x)
-    dy_c = torch.zeros_like(x)
+    y_c = np.zeros_like(x)
+    dy_c = np.zeros_like(x)
 
     if len(params) == 2:
         m = params[0]/100
@@ -50,16 +50,16 @@ def camber_line(params, x):
         l, p, q = params
         c_l, x_f = 3/20*l, p/20
 
-        f = lambda x: x*(1 - torch.sqrt(x/3)) - x_f
-        df = lambda x: 1 - 3*torch.sqrt(x/3)/2
-        old_m = torch.tensor(0.5)
+        f = lambda x: x*(1 - np.sqrt(x/3)) - x_f
+        df = lambda x: 1 - 3*np.sqrt(x/3)/2
+        old_m = np.array(0.5)
         cond = True
         while cond:
-            new_m = torch.max(torch.tensor([old_m - f(old_m)/df(old_m), 0]))
-            cond = (torch.abs(old_m - new_m) > 1e-15)
+            new_m = np.max(np.array([old_m - f(old_m)/df(old_m), 0]))
+            cond = (np.abs(old_m - new_m) > 1e-15)
             old_m = new_m        
         m = old_m
-        r = (3*m - 7*m**2 + 8*m**3 - 4*m**4)/torch.sqrt(m*(1 - m)) - 3/2*(1 - 2*m)*(torch.pi/2 - torch.arcsin(1 - 2*m))
+        r = (3*m - 7*m**2 + 8*m**3 - 4*m**4)/np.sqrt(m*(1 - m)) - 3/2*(1 - 2*m)*(np.pi/2 - np.arcsin(1 - 2*m))
         k_1 = c_l/r
 
         mask1 = (x <= m)
@@ -68,7 +68,7 @@ def camber_line(params, x):
             y_c[mask1] = k_1*((x[mask1]**3 - 3*m*x[mask1]**2 + m**2*(3 - m)*x[mask1]))
             dy_c[mask1] = k_1*(3*x[mask1]**2 - 6*m*x[mask1] + m**2*(3 - m))
             y_c[mask2] = k_1*m**3*(1 - x[mask2])
-            dy_c[mask2] = -k_1*m**3*torch.ones_like(dy_c[mask2])
+            dy_c[mask2] = -k_1*m**3*np.ones_like(dy_c[mask2])
 
         elif q == 1:
             k = (3*(m - x_f)**2 - m**3)/(1 - m)**3
@@ -90,11 +90,11 @@ def naca_generator(params, nb_samples = 400, scale = 1, origin = (0, 0), cosine_
     Definition of a complete profile from the NACA 4 and 5 digits series.
 
     Args:
-        params (torch.tensor): Parameters of the NACA 4 or 5 digits profile (tensor of shape (3) or (4)).
-        nb_samples (int, optional): Number of points to define the profile. Default: ``400``
-        scale (float, optional): Chord length in meters. Default: ``1``
-        origine (tuple, optional): Absolute position of the leading edge. Default: ``(0, 0)``
-        cosin_spacing (bool, optional): If ``True``, points are sampled via a cosine distance instead of uniformly. Default: ``True``
+        params (np.ndarray): Parameters of the NACA 4 or 5 digits profile (ndarray of shape `(3)` or `(4)`).
+        nb_samples (int, optional): Number of points to define the profile. Default: 400
+        scale (float, optional): Chord length in meters. Default: 1
+        origine (tuple, optional): Absolute position of the leading edge. Default: `(0, 0)`
+        cosine_spacing (bool, optional): If ``True``, points are sampled via a cosine distance instead of uniformly. Default: ``True``
         verbose (bool, optional): Comments on the generation process. Default: ``True``
         CTE (bool, optional): If ``True`` the profile will be closed at the trailing edge. Default: ``True``
     """
@@ -112,24 +112,24 @@ def naca_generator(params, nb_samples = 400, scale = 1, origin = (0, 0), cosine_
         raise ValueError('The first argument must be a tuple of the 4 or 5 digits of the airfoil.')    
 
     if cosine_spacing:
-        beta = torch.pi*torch.linspace(1, 0, nb_samples + 1)
-        x = (1 - torch.cos(beta))/2
+        beta = np.pi*np.linspace(1, 0, nb_samples + 1)
+        x = (1 - np.cos(beta))/2
     else:
-        x = torch.linspace(1, 0, nb_samples + 1)
+        x = np.linspace(1, 0, nb_samples + 1)
 
     y_c, dy_c = camber_line(params_c, x)
     y_t = thickness_dist(t, x, CTE)
-    theta = torch.arctan(dy_c)
-    x_u = x - y_t*torch.sin(theta)
-    x_l = x + y_t*torch.sin(theta)
-    y_u = y_c + y_t*torch.cos(theta)
-    y_l = y_c - y_t*torch.cos(theta)
-    x = torch.cat([x_u, x_l[:-1][::-1]], dim = 0)
-    y = torch.cat([y_u, y_l[:-1][::-1]], dim = 0)
-    pos = torch.stack([
+    theta = np.arctan(dy_c)
+    x_u = x - y_t*np.sin(theta)
+    x_l = x + y_t*np.sin(theta)
+    y_u = y_c + y_t*np.cos(theta)
+    y_l = y_c - y_t*np.cos(theta)
+    x = np.concatenate([x_u, x_l[:-1][::-1]], axis = 0)
+    y = np.concatenate([y_u, y_l[:-1][::-1]], axis = 0)
+    pos = np.stack([
             x*scale + origin[0],
             y*scale + origin[1]
-        ], dim = -1
+        ], axis = -1
     )
-    pos[0], pos[-1] = torch.tensor([1, 0]), torch.tensor([1, 0])
+    pos[0], pos[-1] = np.array([1, 0]), np.array([1, 0])
     return pos

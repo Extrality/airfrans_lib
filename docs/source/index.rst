@@ -1,5 +1,5 @@
 Welcome to AirfRANS's documentation!
-===================================
+====================================
 
 **AirfRANS** is a Python library for cooks and food lovers
 that creates recipes mixing random ingredients.
@@ -20,3 +20,4 @@ Contents
 
    usage
    api
+   modules

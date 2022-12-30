@@ -15,3 +15,11 @@ To use Lumache, first install it using pip:
 Creating recipes
 ----------------
 
+You can download the dataset with the ``airfrans.dataset.Download`` function:
+
+.. currentmodule:: airfrans.dataset
+
+.. automodule:: airfrans.dataset
+	:members:
+	:undoc-members:
+	:exclude-members: DownloadProgressBar
