@@ -47,7 +47,7 @@ simulation = af.Simulation(root = PATH_TO_DATASET, name = name)
 See the documentation for more details about this object.
 
 ## License
-This project is licensed under the [MIT license](https://github.com/Extrality/airfrans_lib/blob/main/LICENSE).
+This project is licensed under the [ODbL-1.0 License]([https://github.com/Extrality/airfrans_lib/blob/main/LICENSE](https://opendatacommons.org/licenses/odbl/1-0/)).
 
 ## Reference
 The original paper accepted at the 36th Conference on Neural Information Processing Systems (NeurIPS 2022) Track on Datasets and Benchmarks can be found [here](https://openreview.net/forum?id=Zp8YmiQ_bDC) and the preprint [here](https://arxiv.org/abs/2212.07564). Please cite this paper if you use this dataset in your own work.
