@@ -9,8 +9,8 @@ import airfrans.sampling as sampling
 
 class Simulation:
     """
-    Wrapper to make the study of AirfRANS simulations easier. It only takes in input ``.vtu`` and ``.vtp`` files
-    from the internal and airfoil patches of the simulation.
+    Wrapper to make the study of AirfRANS simulations easier. It only takes in input the location of the
+    ``.vtu`` and ``.vtp`` files from the internal and airfoil patches of the simulation.
     """
     def __init__(self, root, name, T = 298.15):
         """

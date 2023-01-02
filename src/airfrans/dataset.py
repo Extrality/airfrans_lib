@@ -1,6 +1,7 @@
 
 import json
 from urllib.request import urlretrieve
+import os
 import os.path as osp
 import zipfile
 
@@ -43,6 +44,7 @@ def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
     else:
         url = 'https://data.isir.upmc.fr/extrality/NeurIPS_2022/Dataset.zip'
 
+    os.makedirs(root, exist_ok = True)
     with DownloadProgressBar(unit = 'B', unit_scale = True, miniters = 1, unit_divisor = 1024, desc = 'Downloading AirfRANS') as t:
         urlretrieve(url, filename = osp.join(root, file_name + '.zip'), reporthook = t.update_to)
 

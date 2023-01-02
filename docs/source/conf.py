@@ -2,12 +2,14 @@
 
 # -- Project information
 
-project = 'AirfRANS'
-copyright = '2022, Florent Bonnet'
-author = 'Florent Bonnet'
+import airfrans
+import datetime
 
-release = '0.1'
-version = '0.1.2'
+project = 'AirfRANS'
+author = 'Florent Bonnet'
+copyright = f'{datetime.datetime.now().year}, {author}'
+
+version = airfrans.__version__
 
 # -- General configuration
 
@@ -18,6 +20,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
 ]
 
 intersphinx_mapping = {
