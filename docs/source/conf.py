@@ -1,4 +1,8 @@
 # Configuration file for the Sphinx documentation builder.
+import os
+import sys
+import sphinx-rtd-theme
+sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information
 
