@@ -36,6 +36,6 @@ We used `OpenFOAM v2112 <https://www.openfoam.com/>`_ to generate our simulation
 License
 -------
 
-This dataset and this library are under the `Open Data Commons Open Database License (ODbL) v1.0 <https://opendatacommons.org/licenses/odbl/1-0/>`_.
+This dataset is under the `Open Data Commons Open Database License (ODbL) v1.0 <https://opendatacommons.org/licenses/odbl/1-0/>`_ and this library is under the `MIT License <https://github.com/Extrality/airfrans_lib/blob/main/LICENSE>`_.
 
 This work is proposed by `Extrality <https://www.extrality.ai/>`_ and the `MLIA <https://www.isir.upmc.fr/equipes/mlia/>`_ team of Sorbonne Université, Paris.
