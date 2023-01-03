@@ -24,37 +24,37 @@ Attributes
 
 One part of the attributes of the class is the properties of air at the given temperature:
 
-	* :obj:`airfrans.Simulation.MOL` is the molar weigth of air in :math:`kg\cdot mol^{-1}`
-	* :obj:`airfrans.Simulation.P_ref` is the reference pressure in :math:`Pa`
-	* :obj:`airfrans.Simulation.RHO` is the specific mass in :math:`kg\cdot m^{-3}`
-	* :obj:`airfrans.Simulation.NU` is the knimeatic viscosity in :math:`m^2\cdot s^{-2}`
-	* :obj:`airfrans.Simulation.C` is the sound velocity in :math:`m\cdot s^{-1}`.
+	- :obj:`airfrans.Simulation.MOL` is the molar weigth of air in :math:`kg\cdot mol^{-1}`
+	- :obj:`airfrans.Simulation.P_ref` is the reference pressure in :math:`Pa`
+	- :obj:`airfrans.Simulation.RHO` is the specific mass in :math:`kg\cdot m^{-3}`
+	- :obj:`airfrans.Simulation.NU` is the knimeatic viscosity in :math:`m^2\cdot s^{-2}`
+	- :obj:`airfrans.Simulation.C` is the sound velocity in :math:`m\cdot s^{-1}`.
 
 A second part is the boundary conditions:
 
-	* :obj:`airfrans.Simulation.inlet_velocity` is the inlet velocity in :math:`m\cdot s^{-1}`
-	* :obj:`airfrans.Simulation.angle_of_attack` is the angle of attack in :math:`rad`.
+	- :obj:`airfrans.Simulation.inlet_velocity` is the inlet velocity in :math:`m\cdot s^{-1}`
+	- :obj:`airfrans.Simulation.angle_of_attack` is the angle of attack in :math:`rad`.
 
 A third part is the PyVista object of the reference simulation:
 
-	* :obj:`airfrans.Simulation.internal` is the PyVista object of the internal patch
-	* :obj:`airfrans.Simulation.airfoil` is the PyVista object of the aerofoil patch
+	- :obj:`airfrans.Simulation.internal` is the PyVista object of the internal patch
+	- :obj:`airfrans.Simulation.airfoil` is the PyVista object of the aerofoil patch
 
 Finally, the last part is the fields associated with the simulation under the form of NumPy ndarray. Those fields are either defined on the mesh nodes, are the airfoil patch nodes directly:
 
-	* :obj:`airfrans.Simulation.input_velocity` is the inlet velocity copied on each nodes of the internal mesh in :math:`m\cdot s^{-1}`
-	* :obj:`airfrans.Simulation.sdf` is the distance function on the internal mesh in :math:`m`
-	* :obj:`airfrans.Simulation.surface` is a boolean on the internal mesh, it is ``True`` if the node lie on the airfoil
-	* :obj:`airfrans.Simulation.position` is the position of the nodes of the internal mesh in :math:`m`
-	* :obj:`airfrans.Simulation.airfoil_position` is the position of the nodes of the airfoil mesh in :math:`m`
-	* :obj:`airfrans.Simulation.normals` is the outpointing normals of the surface on the internal mesh, it is set to 0 for points not lying on the airfoil
-	* :obj:`airfrans.Simulation.airfoil_normals` is the outpointing normais of the surface on the airfoil mesh
+	- :obj:`airfrans.Simulation.input_velocity` is the inlet velocity copied on each nodes of the internal mesh in :math:`m\cdot s^{-1}`
+	- :obj:`airfrans.Simulation.sdf` is the distance function on the internal mesh in :math:`m`
+	- :obj:`airfrans.Simulation.surface` is a boolean on the internal mesh, it is ``True`` if the node lie on the airfoil
+	- :obj:`airfrans.Simulation.position` is the position of the nodes of the internal mesh in :math:`m`
+	- :obj:`airfrans.Simulation.airfoil_position` is the position of the nodes of the airfoil mesh in :math:`m`
+	- :obj:`airfrans.Simulation.normals` is the outpointing normals of the surface on the internal mesh, it is set to 0 for points not lying on the airfoil
+	- :obj:`airfrans.Simulation.airfoil_normals` is the outpointing normais of the surface on the airfoil mesh
 
 and for the targets:
 
-	* :obj:`airfrans.Simulation.velocity` is the air velocity on the internal mesh in :math:`m\cdot s^{-1}`
-	* :obj:`airfrans.Simulation.pressure` is the air pressure on the internal mesh (divided by the specific mass in the incompressible case)
-	* :obj:`airfrans.Simulation.nu_t` is the kinematic turbulent viscosity on the internal mesh in :math:`m^2\cdot s^{-2}`
+	- :obj:`airfrans.Simulation.velocity` is the air velocity on the internal mesh in :math:`m\cdot s^{-1}`
+	- :obj:`airfrans.Simulation.pressure` is the air pressure on the internal mesh (divided by the specific mass in the incompressible case)
+	- :obj:`airfrans.Simulation.nu_t` is the kinematic turbulent viscosity on the internal mesh in :math:`m^2\cdot s^{-2}`
 
 .. code-block:: python
 
@@ -93,9 +93,9 @@ Methods
 
 Sampling methods are available allowing to potentially free the constrainte of the mesh structure:
 
-	* :obj:`airfrans.Simulation.sampling_volume` allows sampling from two different densities on the internal mesh domain
-	* :obj:`airfrans.Simulation.sampling_surface` allows sampling from two different densities on the airfoil mesh domain
-	* :obj:`airfrans.Simulation.sampling_mesh` allows the sampling of nodes in the internal mesh
+	- :obj:`airfrans.Simulation.sampling_volume` allows sampling from two different densities on the internal mesh domain
+	- :obj:`airfrans.Simulation.sampling_surface` allows sampling from two different densities on the airfoil mesh domain
+	- :obj:`airfrans.Simulation.sampling_mesh` allows the sampling of nodes in the internal mesh
 
 .. code-block:: python
 
