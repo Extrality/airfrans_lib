@@ -4,11 +4,11 @@ Dataset
 The AirfRANS dataset makes available numerical resolutions of the incompressible Reynolds-Averaged Navier–Stokes (RANS) equations over the NACA 4 and 5 digits series of airfoils and in a subsonic flight regime setup.
 
 Its features are:
-- 1000 simulations
-- Reynolds number between 2 and 6 million
-- Angle of attacks between -5° and 15°
-- Airfoil drawn in the NACA 4 and 5 digit series
-- Four machine learning tasks representing different challenges.
+* 1000 simulations
+* Reynolds number between 2 and 6 million
+* Angle of attacks between -5° and 15°
+* Airfoil drawn in the NACA 4 and 5 digit series
+* Four machine learning tasks representing different challenges.
 	
 The four tasks are defined as followed:
 #. `Full data regime`: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
