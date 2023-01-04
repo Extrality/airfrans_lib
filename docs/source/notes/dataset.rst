@@ -5,18 +5,25 @@ The AirfRANS dataset makes available numerical resolutions of the incompressible
 
 Its features are:
 
-1. 1000 simulations
-2. Reynolds number between 2 and 6 million
-3. Angle of attacks between -5° and 15°
-4. Airfoil drawn in the NACA 4 and 5 digit series
-5. Four machine learning tasks representing different challenges.
+- 1000 simulations
+
+- Reynolds number between 2 and 6 million
+
+- Angle of attacks between -5° and 15°
+
+- Airfoil drawn in the NACA 4 and 5 digit series
+
+- Four machine learning tasks representing different challenges.
 	
 The four tasks are defined as followed:
 
-1. `Full data regime`: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
-2. `Scarce data regime`: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
-3. `Reynolds extrapolation regime`: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
-4. `Angle of attack extrapolation regime`: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
+#. `Full data regime`: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
+
+#. `Scarce data regime`: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
+
+#. `Reynolds extrapolation regime`: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
+
+#. `Angle of attack extrapolation regime`: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
 	
 Downloading the dataset
 -----------------------
