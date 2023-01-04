@@ -13,10 +13,10 @@ Its features are:
 	
 The four tasks are defined as followed:
 
-#. `Full data regime`: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
-#. `Scarce data regime`: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
-#. `Reynolds extrapolation regime`: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
-#. `Angle of attack extrapolation regime`: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
+1. `Full data regime`: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
+2. `Scarce data regime`: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
+3. `Reynolds extrapolation regime`: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
+4. `Angle of attack extrapolation regime`: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
 	
 Downloading the dataset
 -----------------------
