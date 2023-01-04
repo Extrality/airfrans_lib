@@ -1,4 +1,4 @@
-airfrans
+airfrans==0.1.2
 sphinx==5.3.0
-sphinx_rtd_theme==1.1.1
+sphinx_rtd_theme==1.2.0rc1
 readthedocs-sphinx-search==0.1.2
