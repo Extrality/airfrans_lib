@@ -25,7 +25,6 @@ Tutorials
 ---------
 
 We used `OpenFOAM v2112 <https://www.openfoam.com/>`_ to generate our simulation. The manipulation and visualization of the results can be done with `ParaView <https://www.paraview.org/>`_ and/or with a pythonic interface such as `PyVista <https://docs.pyvista.org/>`_. Finally, the treatment of those data in a deep learning point of view can be done with Geometric Deep Learning library such as `PyTorch Geometric <https://pytorch-geometric.readthedocs.io/en/latest/#>_ or `Deep Graph Library <https://www.dgl.ai/>`_. As those tools and domains are not necessarily well known in the Machine Learning community, we would like to share some tutorials and books that helped us to be more comfortable with the subject:
-
 - One of the `OpenFOAM wiki <https://wiki.openfoam.com/Main_Page>`_ is a must for learning this powerful tool. For just a taste, you can follow the `First Glimpse Series <https://wiki.openfoam.com/%22first_glimpse%22_series>`_ and for a more in-depth introduction, the `Three Weeks Series <https://wiki.openfoam.com/index.php?title=%223_weeks%22_series>`_.
 - Concerning ParaView, a part of the Three Weeks Series is dedicated to it but can be followed independently. You can find it `here <https://wiki.openfoam.com/index.php?title=Visualization_by_Joel_Guerrero>`_.
 - This `book <https://holzmann-cfd.com/community/publications>`_ proposes an overview of the mathematics in OpenFOAM.
