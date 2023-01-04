@@ -5,11 +5,11 @@ The AirfRANS dataset makes available numerical resolutions of the incompressible
 
 Its features are:
 
-- 1000 simulations
-- Reynolds number between 2 and 6 million
-- Angle of attacks between -5° and 15°
-- Airfoil drawn in the NACA 4 and 5 digit series
-- Four machine learning tasks representing different challenges.
+1. 1000 simulations
+2. Reynolds number between 2 and 6 million
+3. Angle of attacks between -5° and 15°
+4. Airfoil drawn in the NACA 4 and 5 digit series
+5. Four machine learning tasks representing different challenges.
 	
 The four tasks are defined as followed:
 
