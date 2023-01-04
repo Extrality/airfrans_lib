@@ -5,14 +5,14 @@ The AirfRANS dataset is a collection of numerical simulations solving the incomp
 
 This dataset has been built to lower the potential barrier between Machine Learning and Physics research communities. It proposes data on a simple but realistic case which already includes some of the major challenges of Machine Learning for solving Fluid Dynamics, namely:
 
-- working with unstructured data coming from raw numerical simulations,
-- being able to deal with the number of nodes required in simulation meshes (from hundreds of thousands to hundreds of million in 3D cases),
-- treating cases with a realistic Reynolds number,
-- regressing the entire velocity, pressure and turbulent viscosity fields from a geometry and the boundary conditions,
-- being accurate on global forces or coefficient such as drag and lift,
-- being consistent between the predicted fields and the predicted forces,
-- regressing accurately boundary layers and area of simulations where sharp signals appear,
-- producing solutions that respect the conservation equation and the momentum equations.
+1. working with unstructured data coming from raw numerical simulations,
+2. being able to deal with the number of nodes required in simulation meshes (from hundreds of thousands to hundreds of million in 3D cases),
+3. treating cases with a realistic Reynolds number,
+4. regressing the entire velocity, pressure and turbulent viscosity fields from a geometry and the boundary conditions,
+5. being accurate on global forces or coefficient such as drag and lift,
+6. being consistent between the predicted fields and the predicted forces,
+7. regressing accurately boundary layers and area of simulations where sharp signals appear,
+8. producing solutions that respect the conservation equation and the momentum equations.
 
 We hope that this library will ease the manipulation of such simulations and the usage of the AirfRANS dataset.
 
