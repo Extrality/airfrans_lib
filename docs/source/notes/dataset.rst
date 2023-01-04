@@ -4,6 +4,7 @@ Dataset
 The AirfRANS dataset makes available numerical resolutions of the incompressible Reynolds-Averaged Navier-Stokes (RANS) equations over the NACA 4 and 5 digits series of airfoils and in a subsonic flight regime setup.
 
 Its features are:
+
 - 1000 simulations
 - Reynolds number between 2 and 6 million
 - Angle of attacks between -5° and 15°
@@ -11,10 +12,11 @@ Its features are:
 - Four machine learning tasks representing different challenges.
 	
 The four tasks are defined as followed:
-* **Full data regime**: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
-* **Scarce data regime**: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
-* **Reynolds extrapolation regime**: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
-* **Angle of attack extrapolation regime**: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
+
+- **Full data regime**: 800 simulations are used for the training and 200 are kept for testing. Both the trainset and the testset are drawn from the same distribution. This defines an interpolation task.
+- **Scarce data regime**: Same testset as the `Full data regime` task but with only 200 simulations in the trainset. This also defines an interpolation task but in a low data regime scenario.
+- **Reynolds extrapolation regime**: Simulations with Reynolds number between 3 and 5 million are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the reynolds number parameter.
+- **Angle of attack extrapolation regime**: Simulations with angle of attack between -2.5° and 12.5° are kept for the trainset, the others are kept for the testset. This defines an extrapolation task for the angle of attack parameter.
 	
 Downloading the dataset
 -----------------------
