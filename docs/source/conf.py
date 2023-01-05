@@ -24,6 +24,7 @@ extensions = [
 ]
 
 add_module_names = False
+autoclass_content = 'both'
 autodoc_member_order = 'bysource'
 
 intersphinx_mapping = {
