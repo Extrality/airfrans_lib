@@ -1,6 +1,6 @@
 # AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier–Stokes Solutions
 
-The AirfRANS dataset makes available numerical resolutions of the incompressible Reynolds-Averaged Navier–Stokes (RANS) equations over the NACA 4 and 5 digits series of airfoils and in a subsonic flight regime setup.
+The AirfRANS dataset makes available numerical resolutions of the incompressible Reynolds-Averaged Navier–Stokes (RANS) equations over the NACA 4 and 5 digits series of airfoils and in a subsonic flight regime setup. Readthedocs documentation is available [here](https://airfrans.readthedocs.io/en/latest/index.html).
 
 ## Features
 - Access to 1000 simulations.
@@ -21,7 +21,7 @@ From python:
 ```
 import airfrans as af
 
-af.dataset.Download(root = PATH_TO_SAVING_DIRECTORY, unzip = True)
+af.dataset.download(root = PATH_TO_SAVING_DIRECTORY, unzip = True)
 ```
 You can also directly download a ready-to-use version of the dataset in the [PyTorch Geometric library](https://pytorch-geometric.readthedocs.io/en/latest/modules/datasets.html#torch_geometric.datasets.AirfRANS)
 Finally, you can directly download the dataset in the raw OpenFOAM version [here](https://data.isir.upmc.fr/extrality/NeurIPS_2022/OF_dataset.zip), or in the more friendly pre-processed version [here](https://data.isir.upmc.fr/extrality/NeurIPS_2022/Dataset.zip).
@@ -31,7 +31,7 @@ From python:
 ```
 import airfrans as af
 
-dataset, dataname = af.dataset.Load(root = PATH_TO_DATASET, task = TASK, train = True)
+dataset, dataname = af.dataset.load(root = PATH_TO_DATASET, task = TASK, train = True)
 ```
 The tasks are the one presented in the [associated paper](https://arxiv.org/pdf/2212.07564.pdf). You can choose between `'full'`, `'scarce'`, `'reynolds`' and `'aoa'`.
 The dataset loaded in this case is the same as the one you can directly access via the [PyTorch Geometric library](https://pytorch-geometric.readthedocs.io/en/latest/modules/datasets.html#torch_geometric.datasets.AirfRANS). If you want more flexibility about the sampling of each simulation for the inputs or targets, please feel free to build a custom loader with the help of the `'Simulation'` class presented in the following. We highly recommend to handle those data with a Gemetric Deep Learning library such as [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/) or [Deep Graph Library](https://www.dgl.ai/).

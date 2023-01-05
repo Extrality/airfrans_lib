@@ -25,7 +25,7 @@ class DownloadProgressBar(tqdm):
             self.total = tsize
         self.update(b*bsize - self.n) # also sets self.n = b * bsize
 
-def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
+def download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
     """
     Download AirfRANS dataset.
 
@@ -53,7 +53,7 @@ def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
         with zipfile.ZipFile(osp.join(root, file_name + '.zip'), 'r') as zipf:
             zipf.extractall(root)
 
-def Load(root, task, train = True):
+def load(root, task, train = True):
     """
     The different tasks (``'full'``, ``'scarce'``, ``'reynolds'``,
     ``'aoa'``) define the utilized training and test splits. Please note

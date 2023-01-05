@@ -21,13 +21,13 @@ The four tasks are defined as followed:
 Downloading the dataset
 -----------------------
 	
-You can download the dataset by using the function :obj:`airfrans.dataset.Download`
+You can download the dataset by using the function :obj:`airfrans.dataset.download`
 
 .. code-block:: python
 
 	import airfrans as af
 	
-	af.dataset.Download(root = PATH_TO_SAVING_DIRECTORY, file_name = 'Dataset', unzip = True, OpenFOAM = False)
+	af.dataset.download(root = PATH_TO_SAVING_DIRECTORY, file_name = 'Dataset', unzip = True, OpenFOAM = False)
 
 for the pre-processed dataset where simulations have been cropped, minimum features have been kept and ``.vtu`` / ``.vtp`` files have been generated. For the raw OpenFOAM dataset, simply set ``True`` to the ``OpenFOAM`` argument. You can also directly download it `here <https://data.isir.upmc.fr/extrality/NeurIPS_2022/Dataset.zip>`_ for the pre-processed version and `there <https://data.isir.upmc.fr/extrality/NeurIPS_2022/OF_dataset.zip>`_ for the raw OpenFOAM.
 
@@ -36,11 +36,11 @@ Finally, you can access to a ready-to-use version via `PyTorch Geometric dataset
 Loading the dataset
 -------------------
 
-After dowloading the pre-processed dataset, you can load the list of simulations in NumPy arrays with the function :obj:`airfrans.dataset.Load`
+After dowloading the pre-processed dataset, you can load the list of simulations in NumPy arrays with the function :obj:`airfrans.dataset.load`
 
 .. code-block:: python
 
-	dataset_list, dataset_name = af.dataset.Load(root = PATH_TO_DATASET, task = 'full', train = True)
+	dataset_list, dataset_name = af.dataset.load(root = PATH_TO_DATASET, task = 'full', train = True)
 
 We recommend to handle this data with a Geometric Deep Learning library such as `PyTorch Geometric <https://pytorch-geometric.readthedocs.io/en/latest/index.html>`_ or `Deep Graph Library <https://www.dgl.ai/>`_.
 
