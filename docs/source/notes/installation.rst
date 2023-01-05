@@ -1,7 +1,7 @@
 Installation
 ============
 
-Create a virtual environment with Python 3.9 or above and simply run:
+Create a virtual environment with Python 3.7 or greater and simply run:
 
 .. code-block:: console
 
