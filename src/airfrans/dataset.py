@@ -48,8 +48,8 @@ def Download(root, file_name = 'Dataset', unzip = True, OpenFOAM = False):
     with DownloadProgressBar(unit = 'B', unit_scale = True, miniters = 1, unit_divisor = 1024, desc = 'Downloading AirfRANS') as t:
         urlretrieve(url, filename = osp.join(root, file_name + '.zip'), reporthook = t.update_to)
 
-    print('Extracting ' + file_name + '.zip at ' + root + '...')
     if unzip:
+        print("Extracting " + file_name + ".zip at " + root + "...")
         with zipfile.ZipFile(osp.join(root, file_name + '.zip'), 'r') as zipf:
             zipf.extractall(root)
 
