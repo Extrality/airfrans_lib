@@ -64,13 +64,13 @@ def Load(root, task, train = True):
     distance to the airfoil (one component in meter), and the normals (two
     components in meter, set to 0 if the point is not on the airfoil).
 
-    Each point is given a target of 4 components for the underyling regression
+    Each point is given a target of 4 components for the underlying regression
     task: the velocity (two components in meter per second), the pressure
     divided by the specific mass (one component in meter squared per second
     squared), the turbulent kinematic viscosity (one component in meter squared
     per second).
 
-    Finaly, a boolean is attached to each point to inform if this point lies on
+    Finally, a boolean is attached to each point to inform if this point lies on
     the airfoil or not.
 
     The output is a tuple of a list of np.ndarray of shape `(N, 7 + 4 + 1)`, where N is the
