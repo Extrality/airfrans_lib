@@ -46,4 +46,4 @@ We recommend to handle this data with a Geometric Deep Learning library such as 
 
 .. note::
 
-	The dataset loaded when using :obj:`airfrans.dataset.Load` contains point clouds defined as the nodes of the simulation mesh. Do not hesitate to build a custom dataset if you want to use volume/surface sampling of simulations instead of the nodes of the mesh via the :class:`airfrans.Simulation`. The only constraint is that the test scores of models for the four target fields have to be computed at the position of the nodes of the simulation meshes.
+	The dataset loaded when using :obj:`airfrans.dataset.load` contains point clouds defined as the nodes of the simulation mesh. Do not hesitate to build a custom dataset if you want to use volume/surface sampling of simulations instead of the nodes of the mesh via the :class:`airfrans.Simulation`. The only constraint is that the test scores of models for the four target fields have to be computed at the position of the nodes of the simulation meshes.
