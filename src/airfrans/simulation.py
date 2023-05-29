@@ -174,7 +174,7 @@ class Simulation:
         s = s - s.trace(axis1 = -2, axis2 = -1).reshape(-1, 1, 1)*np.eye(2)[None]/3
 
         wss_ = 2*self.NU.reshape(-1, 1, 1)*s
-        wss_ = (wss_*self.normals[self.surface, :2].reshape(-1, 1, 2)).sum(axis = 2)
+        wss_ = -(wss_*self.normals[self.surface, :2].reshape(-1, 1, 2)).sum(axis = 2)
 
         if over_airfoil:
             wss = reorganize(self.position[self.surface], self.airfoil_position, wss_)
@@ -208,22 +208,22 @@ class Simulation:
         airfoil.point_data['p'] = p
         airfoil = airfoil.ptc(pass_point_data = False)
 
-        wp_int = airfoil.cell_data['p'][:, None]*airfoil.cell_data['Normals'][:, :2]
+        wp_int = -airfoil.cell_data['p'][:, None]*airfoil.cell_data['Normals'][:, :2]
 
         wss_int = (airfoil.cell_data['wallShearStress']*airfoil.cell_data['Length'].reshape(-1, 1)).sum(axis = 0)
         wp_int = (wp_int*airfoil.cell_data['Length'].reshape(-1, 1)).sum(axis = 0)
 
         if compressible:
-            force_p = np.array(wp_int)
-            force_v = np.array(-wss_int)
+            force_p = np.array(-wp_int)
+            force_v = np.array(wss_int)
         else:
-            force_p = np.array(wp_int)*self.RHO
-            force_v = np.array(-wss_int)*self.RHO
+            force_p = np.array(-wp_int)*self.RHO
+            force_v = np.array(wss_int)*self.RHO
         force = force_p + force_v
 
         return force, force_p, force_v
 
-    def force_coefficient(self, reference = False):
+    def force_coefficient(self, compressible = False, reference = False):
         """
         Compute the force coefficients for the simulation. The output is a tuple of the form `((cd, cdp, cdv), (cl, clp, clv))`,
         where `cd` is the drag coefficient, `cdp` the pressure contribution of the drag coefficient and `cdv` the viscous
@@ -233,7 +233,7 @@ class Simulation:
             reference (bool, optional): If ``True``, return the force coefficients computed with the reference fields.
                 If ``False``, compute the force coefficients with the fields attribute of the class. Default: ``False``   
         """
-        f, fp, fv = self.force(reference = reference)
+        f, fp, fv = self.force(compressible = compressible, reference = reference)
 
         basis = np.array([[np.cos(self.angle_of_attack), np.sin(self.angle_of_attack)], [-np.sin(self.angle_of_attack), np.cos(self.angle_of_attack)]])
         fp_rot, fv_rot = np.matmul(basis, fp), np.matmul(basis, fv)
