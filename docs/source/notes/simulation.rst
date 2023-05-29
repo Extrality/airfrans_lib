@@ -1,3 +1,7 @@
+.. note::
+	
+	Since version ``0.1.4``, the normals in the ``airfrans.Simulation`` class are inward-pointing instead ouf outward-pointing previsouly. This for consistency with the normals given in the AirfRANS dataset.
+
 Simulation
 ==========
 
@@ -18,6 +22,10 @@ To load a simulation (for example simulation ``'airFoil2D_SST_43.597_5.932_3.551
 	import airfrans as af
 	
 	simulation = af.Simulation(root = PATH_TO_DATASET, name = 'airFoil2D_SST_43.597_5.932_3.551_3.1_1.0_18.252', T = 298.15)
+
+.. note::
+
+	The name of a simulation gives all the information about the boundary conditions used to generate it. For example, in ``'airFoil2D_SST_43.597_5.932_3.551_3.1_1.0_18.252'``, we read that the inlet velocity magnitude is :math:`43.597 m\cdot s^{-1}`, and the angle of attack :math:`5.932^{\circ}`. The last numbers are for the parameters of the NACA arifoil, if we have 3 parameters it means that we are dealing with an airfoil from the 4-digits series, and if we have 4 parameters then this airfoil comes from the 5-digits series (this is due to the fact that the last two digits gives the thickness of the airfoil which only defines a single parameter). To keep with our example, we here deal with an airfoil of the 5-digits series with parameters given by ``(3.551, 3.1, 1.0, 18.252)`` (which are real numbers and not integers). Another example, the NACA 0012 will lead to parameters ``(0, 0, 12)`` and a name ending by ``0_0_12``.
 
 Attributes
 ----------
@@ -47,8 +55,8 @@ Finally, the last part is the fields associated with the simulation under the fo
 - :obj:`airfrans.Simulation.surface` is a boolean on the internal mesh, it is ``True`` if the node lie on the airfoil
 - :obj:`airfrans.Simulation.position` is the position of the nodes of the internal mesh in :math:`m`
 - :obj:`airfrans.Simulation.airfoil_position` is the position of the nodes of the airfoil mesh in :math:`m`
-- :obj:`airfrans.Simulation.normals` is the outpointing normals of the surface on the internal mesh, it is set to 0 for points not lying on the airfoil
-- :obj:`airfrans.Simulation.airfoil_normals` is the outpointing normais of the surface on the airfoil mesh
+- :obj:`airfrans.Simulation.normals` is the inward-pointing normals of the surface on the internal mesh, it is set to 0 for points not lying on the airfoil
+- :obj:`airfrans.Simulation.airfoil_normals` is the inward-pointing normais of the surface on the airfoil mesh
 
 and for the targets:
 

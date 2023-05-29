@@ -47,3 +47,25 @@ We recommend to handle this data with a Geometric Deep Learning library such as 
 .. note::
 
 	The dataset loaded when using :obj:`airfrans.dataset.load` contains point clouds defined as the nodes of the simulation mesh. Do not hesitate to build a custom dataset if you want to use volume/surface sampling of simulations instead of the nodes of the mesh via the :class:`airfrans.Simulation`. The only constraint is that the test scores of models for the four target fields have to be computed at the position of the nodes of the simulation meshes.
+
+Raw versus pre-processed dataset
+--------------------------------
+
+The raw dataset contains the simulations of the AirfRANS dataset as they were outputed by OpenFOAM. The pre-processed version differs from the raw version as it only includes a processed version of the ``.vtu`` / ``.vtp`` files of the simulations.
+
+For the internal field given in the file ending by ``internal.vtu``, we followed:
+
+- **Clipping**: Clip to a box of size ``[(-2, 4), (-1.5, 1.5), (0, 1)]`` where each tuple represents an axis in the order x, y, and z. We did it with the PyVista `clip filter  <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.DataSetFilters.clip_box.html>`_ and we set ``crinkle = True`` in the parameters to leave the cells untouched.
+- **Slicing**:  Take a slice at :math:`z = 0.5` to go from a 3D mesh to a 2D mesh. We did it with the PyVista `slice filter <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.DataSetFilters.slice.html>`_ and we set ``generate_triangles = False``.
+- **Distance function**: Compute the distance function with the PyVista `compute_implicit_distance filter <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.DataSetFilters.compute_implicit_distance.html>`_.
+- **Keep only the required fields**: Only keep the pressure, the velocity, the turbulent viscosity, and the distance function in the data.
+
+For the aerofoil patch (internal boundary) given in the file ending by ``aerofoil.vtp``, we followed:
+
+- **Normals**: Compute the normals with the PyVista `compute_normals filter <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.PolyDataFilters.compute_normals.html>`_. We set ``flip_normals = False`` leading to inward-pointing normals.
+- **Slicing**: Take a slice at :math:`z = 0.5` to go from a 2D mesh to a 1D mesh. We did it with the PyVista `slice filter <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.DataSetFilters.slice.html>`_ and we set ``generate_triangles = False``.
+- **Keep only the required fields**: Only keep the pressure, the velocity, the turbulent velocity, and the normals in the data.
+
+For the freestream patch (external boundary) given in the file ending by ``freestream.vtp``, we followed:
+- **Slicing**: Take a slice at :math:`z = 0.5` to go from a 2D mesh to a 1D mesh. We did it with the PyVista `slice filter <https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.DataSetFilters.slice.html>`_ and we set ``generate_triangles = False``.
+- **Keep only the required fields**: Only keep the pressure, the velocity, and the turbulent velocity in the data.

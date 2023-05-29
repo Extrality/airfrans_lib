@@ -52,7 +52,7 @@ class Simulation:
         
         self.position = np.array(self.internal.points[:, :2]).astype('float64')
         self.airfoil_position = np.array(self.airfoil.points[:, :2]).astype('float64')
-        self.airfoil_normals = np.array(-self.airfoil.point_data['Normals'][:, :2]).astype('float64')
+        self.airfoil_normals = np.array(self.airfoil.point_data['Normals'][:, :2]).astype('float64')
 
         self.normals = np.zeros_like(self.input_velocity).astype('float64')
         self.normals[self.surface] = reorganize(
@@ -109,7 +109,7 @@ class Simulation:
         line_dict = np.array(self.airfoil.lines).reshape(-1, 3)[sampled_line_indices, 1:]
         line_points = np.array(self.airfoil.points)[line_dict]
 
-        normal = np.array(-self.airfoil.point_data['Normals'][line_dict, :2]) 
+        normal = np.array(self.airfoil.point_data['Normals'][line_dict, :2]) 
 
         if targets:
             line_attr = np.concatenate([
@@ -208,17 +208,17 @@ class Simulation:
         airfoil.point_data['p'] = p
         airfoil = airfoil.ptc(pass_point_data = False)
 
-        wp_int = -airfoil.cell_data['p'][:, None]*airfoil.cell_data['Normals'][:, :2]
+        wp_int = airfoil.cell_data['p'][:, None]*airfoil.cell_data['Normals'][:, :2]
 
         wss_int = (airfoil.cell_data['wallShearStress']*airfoil.cell_data['Length'].reshape(-1, 1)).sum(axis = 0)
         wp_int = (wp_int*airfoil.cell_data['Length'].reshape(-1, 1)).sum(axis = 0)
 
         if compressible:
-            force_p = np.array(-wp_int)
-            force_v = np.array(wss_int)
+            force_p = np.array(wp_int)
+            force_v = np.array(-wss_int)
         else:
-            force_p = np.array(-wp_int)*self.RHO
-            force_v = np.array(wss_int)*self.RHO
+            force_p = np.array(wp_int)*self.RHO
+            force_v = np.array(-wss_int)*self.RHO
         force = force_p + force_v
 
         return force, force_p, force_v
@@ -334,10 +334,10 @@ class Simulation:
             idx_extrado = self.airfoil_position[:, 1] > camber
 
             if extrado:
-                arg = np.argmin(np.abs(self.airfoil_position[idx_extrado, 0] - x))
+                arg = np.argmin(np.abs(self.airfoil_position[idx_extrado, 0] - x)) + 1
                 arg = np.argwhere(idx_extrado.cumsum(axis = 0) == arg)[0][0]
             else:
-                arg = np.argmin(np.abs(self.airfoil_position[~idx_extrado, 0] - x))
+                arg = np.argmin(np.abs(self.airfoil_position[~idx_extrado, 0] - x)) + 1
                 arg = np.argwhere((~idx_extrado).cumsum(axis = 0) == arg)[0][0]
 
             if direction == 'normals':
