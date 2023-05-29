@@ -230,6 +230,7 @@ class Simulation:
         contribution of the drag coefficient. Same for the lift coefficient `cl`.
 
         Args:
+            compressible (bool, optional): If ``False``, multiply the force computed with the simulation field by the specific mass. Default: ``False``
             reference (bool, optional): If ``True``, return the force coefficients computed with the reference fields.
                 If ``False``, compute the force coefficients with the fields attribute of the class. Default: ``False``   
         """

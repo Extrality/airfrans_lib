@@ -1,6 +1,6 @@
 .. note::
 	
-	Since version ``0.1.4``, the normals in the ``airfrans.Simulation`` class are inward-pointing instead ouf outward-pointing previsouly. This for consistency with the normals given in the AirfRANS dataset.
+	Since version ``0.1.4``, the normals in the ``airfrans.Simulation`` class are inward-pointing instead of outward-pointing as previously. This for consistency with the normals given in the AirfRANS dataset.
 
 Simulation
 ==========
