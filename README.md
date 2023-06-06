@@ -50,7 +50,9 @@ See the documentation for more details about this object.
 This project is licensed under the [ODbL-1.0 License](https://opendatacommons.org/licenses/odbl/1-0/).
 
 ## Reference
-The original paper accepted at the 36th Conference on Neural Information Processing Systems (NeurIPS 2022) Track on Datasets and Benchmarks can be found [here](https://openreview.net/forum?id=Zp8YmiQ_bDC) and the preprint [here](https://arxiv.org/abs/2212.07564). Please cite this paper if you use this dataset in your own work.
+The original paper accepted at the 36th Conference on Neural Information Processing Systems (NeurIPS 2022) Track on Datasets and Benchmarks can be found [here](https://openreview.net/forum?id=Zp8YmiQ_bDC) and the preprint [here](https://arxiv.org/abs/2212.07564). **Disclaimer: An important update correcting an inconsistency in the Machine Learning experiments proposed in the main part of the NeurIPS version of the paper has been done. Please refer to the [ArXiv version](https://arxiv.org/abs/2212.07564) for the up to date version.** 
+
+Please cite this paper if you use this dataset in your own work.
 ```
 @inproceedings{
 bonnet2022airfrans,
