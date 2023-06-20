@@ -107,13 +107,15 @@ Sampling methods are available allowing to potentially free the constrainte of t
 
 .. code-block:: python
 
-	sampling_volume_uniform = simulation.sampling_volume(50000, density = 'uniform')
-	sampling_volume_mesh = simulation.sampling_volume(50000, density = 'mesh_density')
+	seed = 0
+
+	sampling_volume_uniform = simulation.sampling_volume(seed, 50000, density = 'uniform')
+	sampling_volume_mesh = simulation.sampling_volume(seed, 50000, density = 'mesh_density')
 	
-	sampling_surface_uniform = simulation.sampling_surface(500, density = 'uniform')
-	sampling_surface_mesh = simulation.sampling_surface(500, density = 'mesh_density')
+	sampling_surface_uniform = simulation.sampling_surface(seed, 500, density = 'uniform')
+	sampling_surface_mesh = simulation.sampling_surface(seed, 500, density = 'mesh_density')
 	
-	sampling_mesh = simulation.sampling_mesh(50000)
+	sampling_mesh = simulation.sampling_mesh(seed, 50000)
 	sampling_mesh_surface = sampling_mesh[sampling_mesh[:, 2].astype('bool')]
 	
 	fig, ax = plt.subplots(2, 3, figsize = (36, 12))

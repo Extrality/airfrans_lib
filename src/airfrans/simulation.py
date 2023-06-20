@@ -66,20 +66,23 @@ class Simulation:
         self.pressure = np.array(self.internal.point_data['p'][:, None]).astype('float64')
         self.nu_t = np.array(self.internal.point_data['nut'][:, None]).astype('float64')
 
-    def sampling_volume(self, n, density = 'uniform', targets = True):
+    def sampling_volume(self, seed, n, density = 'uniform', targets = True):
         """
         Sample points in the internal mesh following the given density.
 
         Args:
+            seed (int): Seed for the random number generator.
             n (int): Number of sampled points.
             density (str, optional): Density from which the sampling is done. Choose between ``'uniform'`` and ``'mesh_density'``. Default: ``'uniform'``
             targets (bool, optional): If ``True``, velocity, pressure and kinematic turbulent viscosity will be returned in the output ndarray. Default: ``True``
         """
+        rng = np.random.default_rng(seed = seed)
+
         if density == 'uniform': # Uniform sampling strategy
             p = np.array(self.internal.cell_data['Area']/self.internal.cell_data['Area'].sum())
-            sampled_cell_indices = np.random.choice(self.internal.n_cells, size = n, replace = True, p = p)
+            sampled_cell_indices = rng.choice(self.internal.n_cells, size = n, replace = True, p = p)
         elif density == 'mesh_density': # Sample via mesh density
-            sampled_cell_indices = np.random.choice(self.internal.n_cells, size = n, replace = True)
+            sampled_cell_indices = rng.choice(self.internal.n_cells, size = n, replace = True)
 
         cell_dict = np.array(self.internal.cells).reshape(-1, 5)[sampled_cell_indices, 1:]
         cell_points = self.position[cell_dict]
@@ -87,24 +90,29 @@ class Simulation:
         if targets:
             cell_attr = np.concatenate([self.sdf[cell_dict], self.velocity[cell_dict], self.pressure[cell_dict], self.nu_t[cell_dict]], axis = -1)
         else:
-            cell_attr = self.sdf[cell_dict]            
+            cell_attr = self.sdf[cell_dict]   
 
-        return sampling.cell_sampling_2d(cell_points, cell_attr)
+        seed_sampling = rng.integers(10000)         
+
+        return sampling.cell_sampling_2d(seed_sampling, cell_points, cell_attr)
     
-    def sampling_surface(self, n, density = 'uniform', targets = True):
+    def sampling_surface(self, seed, n, density = 'uniform', targets = True):
         """
         Sample points in the airfoil mesh following the given density.
 
         Args:
+            seed (int): Seed for the random number generator.
             n (int): Number of sampled points.
             density (str, optional): Density from which the sampling is done. Choose between ``'uniform'`` and ``'mesh_density'``. Default: ``'uniform'``
             targets (bool, optional): If ``True``, velocity, pressure and kinematic turbulent viscosity will be returned in the output ndarray. Default: ``True``
         """
+        rng = np.random.default_rng(seed = seed)
+
         if density == 'uniform': # Uniform sampling strategy
             p = np.array(self.airfoil.cell_data['Length']/self.airfoil.cell_data['Length'].sum())
-            sampled_line_indices = np.random.choice(self.airfoil.n_cells, size = n, replace = True, p = p)
+            sampled_line_indices = rng.choice(self.airfoil.n_cells, size = n, replace = True, p = p)
         elif density == 'mesh_density': # Sample via mesh density
-            sampled_line_indices = np.random.choice(self.airfoil.n_cells, size = n, replace = True)
+            sampled_line_indices = rng.choice(self.airfoil.n_cells, size = n, replace = True)
 
         line_dict = np.array(self.airfoil.lines).reshape(-1, 3)[sampled_line_indices, 1:]
         line_points = np.array(self.airfoil.points)[line_dict]
@@ -119,19 +127,23 @@ class Simulation:
                 np.array(self.airfoil.point_data['nut'][line_dict, None])
                 ], axis = -1)
         else:
-            line_attr = normal     
+            line_attr = normal  
 
-        return sampling.cell_sampling_1d(line_points, line_attr)
+        seed_sampling = rng.integers(10000)
 
-    def sampling_mesh(self, n, targets = True):
+        return sampling.cell_sampling_1d(seed_sampling, line_points, line_attr)
+
+    def sampling_mesh(self, seed, n, targets = True):
         """
         Sample points over the simulation mesh without replacement.
 
         Args:
+            seed (int): Seed for the random number generator.
             n (int): Number of sampled points, this number has to be lower than the total number of points in the mesh.
             targets (bool, optional): If ``True``, velocity, pressure and kinematic turbulent viscosity will be returned in the output ndarray. Default: ``True``
         """
-        idx = np.random.choice(self.position.shape[0], size = n, replace = False)
+        rng = np.random.default_rng(seed = seed)
+        idx = rng.choice(self.position.shape[0], size = n, replace = False)
 
         # Position
         position = self.position[idx]
