@@ -68,7 +68,9 @@ class Simulation:
 
     def sampling_volume(self, seed, n, density = 'uniform', targets = True):
         """
-        Sample points in the internal mesh following the given density.
+        Sample points in the internal mesh following the given density. The outputs is a ndarray of shape (n, 2 + 1) or (n, 2 + 1 + 4)
+        if targets is ``True``. The two first columns are the position of the sampled points, followed by the distance to the airfoil
+        and the targets (in the order x-velocity, y-velocity, pressure, and turbulent viscosity) if called.
 
         Args:
             seed (int): Seed for the random number generator.
@@ -98,7 +100,9 @@ class Simulation:
     
     def sampling_surface(self, seed, n, density = 'uniform', targets = True):
         """
-        Sample points in the airfoil mesh following the given density.
+        Sample points in the airfoil mesh following the given density. The outputs is a ndarray of shape (n, 2 + 2) or (n, 2 + 2 + 4)
+        if targets is ``True``. The two first columns are the position of the sampled points, followed by the x and y components of
+        the inward-pointing normals and the targets (in the order x-velocity, y-velocity, pressure, and turbulent viscosity) if called.
 
         Args:
             seed (int): Seed for the random number generator.
@@ -135,7 +139,11 @@ class Simulation:
 
     def sampling_mesh(self, seed, n, targets = True):
         """
-        Sample points over the simulation mesh without replacement.
+        Sample points over the simulation mesh without replacement. The outputs is a ndarray of shape (n, 2 + 6) or (n, 2 + 6 + 4)
+        if targets is ``True``. The two first columns are the position of the sampled points, followed by a boolean set to ``True``
+        if the sample points belongs to the surface, the distance to the airfoil, the x and y components of the normals (set to 0
+        if the sample points does not belong to the surface), the x and y components of the input velocity and the targets (in the
+        order x-velocity, y-velocity, pressure, and turbulent viscosity) if called.
 
         Args:
             seed (int): Seed for the random number generator.
