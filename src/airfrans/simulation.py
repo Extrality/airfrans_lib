@@ -341,7 +341,7 @@ class Simulation:
             local_frame (bool, optional): If ``True``, the sampled velocity components along the lines are given in the local frame,
                 i.e. the frame defined by the normals. Else, the sampled velocity components are given in the cartesian frame.
                 If x>= 1, this parameter is not taken into account and the cartesian frame is adopted. Default: False
-                resolution (int, optional): Resolution of the sampling. Default: 1000
+            resolution (int, optional): Resolution of the sampling. Default: 1000
             compressible (bool, optional): If ``True``, add the specific mass to the normalization constant for the pressure.
                 Default: ``False``
             reference (bool, optional): If ``True``, return the sampled fields of reference. If ``False``, return the sampled
